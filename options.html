@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DragOn 사이트 관리</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <img src="icons/icon-48.png" alt="" />
+      <div>
+        <h1>DragOn 사이트 관리</h1>
+        <p class="sub" id="sub"></p>
+      </div>
+    </header>
+
+    <form id="add-form" autocomplete="off">
+      <input type="text" id="add-input" placeholder="사이트 주소 (예: example.com 또는 https://example.com/page)" />
+      <button type="submit" class="accent">추가</button>
+    </form>
+    <p id="message" class="message" hidden></p>
+
+    <div class="toolbar">
+      <input type="search" id="filter" placeholder="검색" />
+      <span id="count" class="count"></span>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="col-host">사이트</th>
+          <th class="col-check">우클릭 · 복사</th>
+          <th class="col-check">강력 모드</th>
+          <th class="col-del"></th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p id="empty" class="empty" hidden>등록된 사이트가 없습니다. 위에서 추가하거나, 사이트에서 DragOn 아이콘을 눌러 켜세요.</p>
+
+    <p class="hint">변경 사항은 해당 사이트를 새로고침하면 적용됩니다.</p>
+
+    <section id="storage">
+      <h2>설정 저장 위치</h2>
+
+      <div id="storage-browser" hidden>
+        <p class="state"><b>이 브라우저에 저장</b> (기본)</p>
+        <p class="desc">Edge에 로그인하고 확장 동기화를 켜 두면 같은 계정의 다른 PC와 공유됩니다. 외부 서버와 통신하지 않습니다.</p>
+        <button type="button" id="btn-open-connect">서버(WebDAV) 동기화 연결</button>
+      </div>
+
+      <div id="storage-server" hidden>
+        <p class="state"><b>서버(WebDAV) 동기화</b> <span id="server-url" class="url"></span></p>
+        <p class="desc" id="server-state"></p>
+        <div class="buttons">
+          <button type="button" id="btn-sync" class="accent">동기화<span id="dirty-dot" hidden></span></button>
+          <button type="button" id="btn-edit-connect">접속 정보 변경</button>
+          <button type="button" id="btn-disconnect" class="danger">브라우저 저장으로 전환</button>
+        </div>
+      </div>
+
+      <form id="form-connect" autocomplete="off" hidden>
+        <label>WebDAV 폴더 주소<input name="url" type="url" required placeholder="https://my-server/folder" /></label>
+        <label>아이디<input name="username" required /></label>
+        <label>비밀번호<input name="password" type="password" /></label>
+        <p class="desc">사이트 목록은 이 폴더 아래 계정별 파일로 저장되고, 아이디·비밀번호로 암호화됩니다. 다른 PC에서도 같은 주소와 아이디·비밀번호를 넣으면 같은 목록을 씁니다. 저장된 비밀번호는 다시 표시하지 않습니다.</p>
+        <div class="buttons">
+          <button type="submit" class="accent">연결 및 동기화</button>
+          <button type="button" id="connect-cancel">취소</button>
+        </div>
+      </form>
+      <p id="storage-message" class="message" hidden></p>
+    </section>
+  </main>
+
+  <!-- 연결할 때 서버에 다른 목록이 있으면 (TapCode 충돌 선택과 같음) -->
+  <dialog id="conflict">
+    <p id="conflict-text"></p>
+    <div class="buttons stack">
+      <button value="remote" class="accent">서버 목록으로 덮어쓰기</button>
+      <button value="local">이 기기 목록을 서버에 올리기</button>
+      <button value="">취소</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

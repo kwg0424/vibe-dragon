@@ -1,0 +1,147 @@
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --fg: #1f2328;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --accent: #2563eb;
+  --danger: #dc2626;
+  --ok: #15803d;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17181b;
+    --card: #1f2023;
+    --fg: #e6e6e6;
+    --muted: #9ca3af;
+    --line: #34363b;
+    --accent: #60a5fa;
+    --danger: #f87171;
+    --ok: #4ade80;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 14px/1.5 "Segoe UI", "Malgun Gothic", sans-serif;
+}
+main {
+  max-width: 720px;
+  margin: 32px auto;
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+header img { width: 40px; height: 40px; }
+h1 { margin: 0; font-size: 20px; }
+.sub { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+
+input[type="text"], input[type="search"] {
+  font: inherit;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+input[type="text"]:focus, input[type="search"]:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--fg);
+}
+
+#add-form { display: flex; gap: 8px; }
+#add-input { flex: 1; min-width: 0; }
+/* 추가 버튼은 동기화 버튼과 같은 모양 (button.accent) */
+
+.message { margin: 8px 0 0; font-size: 13px; color: var(--ok); }
+.message.error { color: var(--danger); }
+
+.toolbar { display: flex; align-items: center; gap: 12px; margin: 20px 0 8px; }
+#filter { width: 220px; }
+.count { margin-left: auto; color: var(--muted); font-size: 13px; }
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 8px;
+  border-bottom: 1px solid var(--line);
+}
+td { padding: 8px; border-bottom: 1px solid var(--line); }
+.col-host { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.col-check { width: 110px; text-align: center; }
+.col-del { width: 72px; text-align: right; }
+input[type="checkbox"] {
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1.5px solid var(--muted);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="checkbox"]:checked { background: var(--accent); border-color: var(--accent); }
+input[type="checkbox"]:checked::after {
+  content: "";
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: translateY(-1px) rotate(45deg);
+}
+input[type="checkbox"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.del { padding: 4px 10px; font-size: 12px; color: var(--danger); }
+.del:hover { border-color: var(--danger); }
+
+.empty { color: var(--muted); text-align: center; padding: 24px 0; }
+.hint { margin: 16px 0 0; color: var(--muted); font-size: 12px; }
+
+@media (max-width: 560px) {
+  main { margin: 0; border-radius: 0; border: 0; padding: 16px; }
+  .col-check { width: 72px; }
+  #filter { width: 140px; }
+}
+
+#storage { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); }
+h2 { margin: 0 0 10px; font-size: 16px; }
+.state { margin: 0; }
+.url { color: var(--muted); font-size: 13px; word-break: break-all; }
+.desc { margin: 4px 0 12px; color: var(--muted); font-size: 13px; }
+.desc.error { color: var(--danger); }
+.buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.danger { color: var(--danger); } /* TapCode "이 기기 데이터 삭제" 와 같은 모양: 빨간 글씨 */
+button.danger:hover { border-color: var(--danger); }
+/* 동기화·추가: 파란 글씨에 옅은 파란 바탕 */
+button.accent { color: var(--accent); background: color-mix(in srgb, var(--accent) 22%, transparent); border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+button.accent:hover { background: color-mix(in srgb, var(--accent) 32%, transparent); border-color: var(--accent); }
+#btn-edit-connect { margin-left: auto; } /* 접속 정보 변경 · 전환은 오른쪽에 묶음 */
+button:disabled { opacity: 0.6; cursor: progress; }
+#btn-sync { position: relative; }
+#dirty-dot { position: absolute; top: -3px; right: -3px; width: 10px; height: 10px; border-radius: 50%; background: var(--danger); border: 2px solid var(--card); }
+#form-connect { display: grid; gap: 10px; max-width: 480px; }
+#form-connect[hidden] { display: none; }
+#form-connect label { display: grid; gap: 4px; font-size: 13px; font-weight: 600; }
+#form-connect input { font: inherit; font-weight: 400; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+#form-connect input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+#form-connect .desc { margin: 0; }
+
+dialog { border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--fg); width: 340px; padding: 18px; }
+dialog::backdrop { background: rgba(0, 0, 0, 0.35); }
+dialog p { margin: 0 0 14px; font-size: 14px; white-space: pre-line; }
+.buttons.stack { flex-direction: column; }
