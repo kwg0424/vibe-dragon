@@ -1,0 +1,11 @@
+{
+   "extDesc": {
+      "message": "사이트별로 우클릭·드래그·복사 차단을 해제합니다. 설정은 브라우저에 저장하고, 원하면 내 WebDAV 서버와 동기화합니다."
+   },
+   "extName": {
+      "message": "DragOn - 우클릭·복사 허용"
+   },
+   "extShortName": {
+      "message": "DragOn"
+   }
+}
